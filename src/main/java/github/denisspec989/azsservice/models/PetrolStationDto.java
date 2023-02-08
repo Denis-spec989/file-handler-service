@@ -1,5 +1,6 @@
 package github.denisspec989.azsservice.models;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import lombok.*;
 
 import java.util.List;
@@ -16,6 +17,8 @@ public class PetrolStationDto {
     private String      telephone;
     private String      azsName;
     private String      azsAddress;
+    @JacksonXmlElementWrapper(useWrapping = false)
     private List<PriceModelDto> priceModelList;
+    @JacksonXmlElementWrapper(useWrapping = false)
     private List<ServiceModelDto> serviceModelList;
 }

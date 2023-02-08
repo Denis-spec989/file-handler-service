@@ -1,0 +1,17 @@
+server:
+  port: 8087
+spring:
+  application:
+    name: azs-service
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL10Dialect
+    #    generate-ddl: false
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/azs_db
+    username: postgres
+    password: IONkinaM-2102

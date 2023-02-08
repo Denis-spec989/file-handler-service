@@ -41,6 +41,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+			<version>2.13.2</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -58,6 +63,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>azs-service</finalName>
 	</build>
 
 </project>

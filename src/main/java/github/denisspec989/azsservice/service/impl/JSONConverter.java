@@ -1,4 +1,4 @@
-package github.denisspec989.azsservice.service;
+package github.denisspec989.azsservice.service.impl;
 
 
 
@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import github.denisspec989.azsservice.models.JSON;
 import github.denisspec989.azsservice.models.PetrolStationDto;
+import github.denisspec989.azsservice.service.Converter;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;

@@ -17,7 +17,7 @@ public class XMLConverter implements Converter<XML, Iterable<PetrolStationDto>> 
     public Iterable<PetrolStationDto> convert(XML input) throws IOException {
         XmlMapper xmlMapper = new XmlMapper();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        stream.write(input.getMultipartFile().getBytes());
+        stream.write(input.getBytes());
         String finalString = new String(stream.toByteArray());
         ArrayList<PetrolStationDto> stations = xmlMapper.readValue(finalString,new TypeReference<ArrayList<PetrolStationDto>>() {});
         return stations;

@@ -15,10 +15,11 @@ import java.util.ArrayList;
 
 
 public class JSONConverter implements Converter<JSON, Iterable<PetrolStationDto>> {
+
     @Override
     public Iterable<PetrolStationDto> convert(JSON input) throws IOException {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        stream.write(input.getMultipartFile().getBytes());
+        stream.write(input.getBytes());
         String finalString = new String(stream.toByteArray());
         ArrayList<PetrolStationDto> stations = new ObjectMapper().readValue(finalString, new TypeReference<ArrayList<PetrolStationDto>>() {});
         return stations;

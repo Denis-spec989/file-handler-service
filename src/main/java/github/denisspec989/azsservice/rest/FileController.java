@@ -4,7 +4,9 @@ import github.denisspec989.azsservice.models.FileDto;
 import github.denisspec989.azsservice.models.JSON;
 import github.denisspec989.azsservice.models.PetrolStationDto;
 import github.denisspec989.azsservice.models.XML;
+import github.denisspec989.azsservice.service.ConverterService;
 import github.denisspec989.azsservice.service.FileService;
+import github.denisspec989.azsservice.service.impl.ConverterServiceImpl;
 import github.denisspec989.azsservice.service.impl.JSONConverter;
 import github.denisspec989.azsservice.service.impl.XMLConverter;
 import lombok.RequiredArgsConstructor;
@@ -26,13 +28,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FileController {
     private final FileService fileService;
-    @PostMapping(value = "/json",consumes = "multipart/form-data")
-    List<PetrolStationDto> getJsonData(@RequestParam("file") MultipartFile file){
-        return null;
+    private final ConverterService<Iterable<PetrolStationDto>> converterService;
+    @PostMapping(value = "/json")
+    List<PetrolStationDto> getJsonData(@RequestParam("fileName") String fileName){
+        return (List<PetrolStationDto>) converterService.convert(new JSON(fileService.getFile(fileName+".json").getFileBytes()));
     }
-    @PostMapping(value = "/xml",consumes = "multipart/form-data")
-    List<PetrolStationDto> getXmlData(@RequestParam("file") MultipartFile file){
-        return null;
+    @PostMapping(value = "/xml")
+    List<PetrolStationDto> getXmlData(@RequestParam("fileName") String fileName){
+        return (List<PetrolStationDto>) converterService.convert(new XML(fileService.getFile(fileName+".xml").getFileBytes()));
     }
     @SneakyThrows
     @PostMapping(value = "/load",consumes = "multipart/form-data")

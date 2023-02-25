@@ -12,9 +12,17 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class FileServiceImpl implements FileService {
     private final FileRepository fileRepository;
+
+    @Override
+    @Transactional
+    public FileEntity getFile(String fileName) {
+        return fileRepository.findByName(fileName).orElseThrow();
+    }
+
     @Override
     @Transactional
     public void loadFileToDB(FileDto fileDto) {
+        fileRepository.findByName(fileDto.getName()).ifPresent(fileRepository::delete);
         FileEntity file = new FileEntity();
         file.setFileBytes(fileDto.getFileBytes());
         file.setName(fileDto.getName());

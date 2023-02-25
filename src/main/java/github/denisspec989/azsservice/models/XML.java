@@ -7,5 +7,5 @@ import org.springframework.web.multipart.MultipartFile;
 @Getter
 @AllArgsConstructor
 public class XML {
-    private final MultipartFile multipartFile;
+    private byte[] bytes;
 }

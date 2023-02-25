@@ -12,7 +12,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@Service
 public class XMLConverter implements Converter<XML, Iterable<PetrolStationDto>> {
     @Override
     public Iterable<PetrolStationDto> convert(XML input) throws IOException {

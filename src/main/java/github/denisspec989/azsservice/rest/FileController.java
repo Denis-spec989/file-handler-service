@@ -25,24 +25,14 @@ import java.util.List;
 @RequestMapping("/api/v1/files")
 @RequiredArgsConstructor
 public class FileController {
-    private final JSONConverter jsonConverter;
-    private final XMLConverter xmlConverter;
     private final FileService fileService;
     @PostMapping(value = "/json",consumes = "multipart/form-data")
     List<PetrolStationDto> getJsonData(@RequestParam("file") MultipartFile file){
-        try {
-            return (List<PetrolStationDto>)jsonConverter.convert(new JSON(file));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        return null;
     }
     @PostMapping(value = "/xml",consumes = "multipart/form-data")
     List<PetrolStationDto> getXmlData(@RequestParam("file") MultipartFile file){
-        try {
-            return (List<PetrolStationDto>)xmlConverter.convert(new XML(file));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        return null;
     }
     @SneakyThrows
     @PostMapping(value = "/load",consumes = "multipart/form-data")

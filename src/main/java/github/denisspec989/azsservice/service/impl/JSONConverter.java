@@ -13,7 +13,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@Service
+
 public class JSONConverter implements Converter<JSON, Iterable<PetrolStationDto>> {
     @Override
     public Iterable<PetrolStationDto> convert(JSON input) throws IOException {

@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class FileServiceImpl implements FileService {
@@ -22,11 +24,18 @@ public class FileServiceImpl implements FileService {
     @Override
     @Transactional
     public void loadFileToDB(FileDto fileDto) {
-        fileRepository.findByName(fileDto.getName()).ifPresent(fileRepository::delete);
+        Optional<FileEntity> fileEntityOptional = fileRepository.findByName(fileDto.getName());
+        if(!fileEntityOptional.isEmpty()){
+            FileEntity fileEntity = fileEntityOptional.get();
+            fileEntity.setSize(fileDto.getSize());
+            fileEntity.setFileBytes(fileDto.getFileBytes());
+            fileRepository.save(fileEntity);
+        } else {
         FileEntity file = new FileEntity();
         file.setFileBytes(fileDto.getFileBytes());
         file.setName(fileDto.getName());
         file.setSize(fileDto.getSize());
         fileRepository.save(file);
+        }
     }
 }

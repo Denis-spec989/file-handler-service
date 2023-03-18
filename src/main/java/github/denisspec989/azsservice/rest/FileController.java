@@ -13,10 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -29,13 +26,13 @@ import java.util.List;
 public class FileController {
     private final FileService fileService;
     private final ConverterService<Iterable<PetrolStationDto>> converterService;
-    @PostMapping(value = "/json")
-    List<PetrolStationDto> getJsonData(@RequestParam("fileName") String fileName){
-        return (List<PetrolStationDto>) converterService.convert(new JSON(fileService.getFile(fileName+".json").getFileBytes()));
+    @GetMapping(value = "/json")
+    ResponseEntity<List<PetrolStationDto>> getJsonData(@RequestParam("fileName") String fileName){
+        return new ResponseEntity<>((List<PetrolStationDto>) converterService.convert(new JSON(fileService.getFile(fileName+".json").getFileBytes())),HttpStatus.OK);
     }
-    @PostMapping(value = "/xml")
-    List<PetrolStationDto> getXmlData(@RequestParam("fileName") String fileName){
-        return (List<PetrolStationDto>) converterService.convert(new XML(fileService.getFile(fileName+".xml").getFileBytes()));
+    @GetMapping(value = "/xml")
+    ResponseEntity<List<PetrolStationDto>> getXmlData(@RequestParam("fileName") String fileName){
+        return new ResponseEntity<>((List<PetrolStationDto>) converterService.convert(new XML(fileService.getFile(fileName+".xml").getFileBytes())),HttpStatus.OK);
     }
     @SneakyThrows
     @PostMapping(value = "/load",consumes = "multipart/form-data")

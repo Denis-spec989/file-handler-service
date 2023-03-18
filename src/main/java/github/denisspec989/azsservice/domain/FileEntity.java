@@ -7,8 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.UUID;
 
-@Entity
-@Table(name = "files")
+
 @Getter
 @Setter
 @DynamicUpdate
@@ -17,6 +16,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @Data
 @Builder
+@Entity
+@Table(name = "files")
 public class FileEntity {
     @Id
     @GeneratedValue(generator = "UUID")
